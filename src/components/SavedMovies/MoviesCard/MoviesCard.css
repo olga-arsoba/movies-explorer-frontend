@@ -1,0 +1,11 @@
+.movie__delete {
+    margin-top: 30px;
+    margin-left: 22px;
+    background: url(../../../images/delete.svg) no-repeat;
+    border: none;
+    cursor: pointer;
+    width: 14px;
+    height: 12px;
+    margin-bottom: 3px;
+    background-color: #F9F9F9;
+}

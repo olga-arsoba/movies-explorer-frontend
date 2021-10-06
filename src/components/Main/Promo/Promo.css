@@ -1,0 +1,35 @@
+.promo {
+    min-height: 524px;
+    background-color: #073042;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.promo__info {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 50px;
+    line-height: 58px;
+    text-align: center;
+    letter-spacing: -0.04em;
+    color: #FFFFFF;
+    margin: 0;
+    max-width: 730px;
+}
+
+.landing__logo {
+    position: absolute;
+}
+
+@media screen and (max-width: 520px) {
+    .promo__info {
+        font-size: 31px;
+        line-height: 39px;
+    }
+    .landing__logo {
+        height: 248px;
+        width: 100%;
+    }
+}

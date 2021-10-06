@@ -1,0 +1,68 @@
+.navigation__button {
+    display: none;
+    height: 44px;
+    border: none;
+    cursor: pointer;
+    background-color: #FFFFFF;
+}
+
+.navigation__popup {
+    background-color: #FFFFFF;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    right: 0;
+    width: 70%;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.navigation__popup-links {
+    margin-top: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header__link_big {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    color: #000000;
+    text-decoration: none;
+    margin: 0 0 28px;
+}
+
+.navigation__button_close {
+    top: 23px;
+    right: 23px;
+    height: 22px;
+    border: none;
+    cursor: pointer;
+    background-color: #FFFFFF;
+    position: absolute;
+    z-index: 101;
+}
+
+.account__button_profile {
+    margin-top: auto;
+    margin-bottom: 90px;
+}
+
+@media screen and (max-width: 768px) {
+    .navigation__top {
+        display: none;
+    }
+    .navigation__button {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .navigation__popup {
+        width: 100%;
+    }
+}

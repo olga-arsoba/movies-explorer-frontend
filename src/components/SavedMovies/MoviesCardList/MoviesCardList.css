@@ -1,0 +1,13 @@
+.card__list-save {
+    padding-left: 70px;
+    padding-right: 70px;
+    padding-top: 30px;
+    padding-bottom: 140px;
+}
+
+@media screen and (max-width: 768px) {
+    .card__list-save{
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}
