@@ -1,28 +1,33 @@
 import React from 'react'
 import './Profile.css'
 import Header from '../Header/Header'
-import Navigation from "../Navigation/Navigation";
+import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 
-function Profile() {
+function Profile(props) {
+    const {logout} = props
+    const currentUser = React.useContext(CurrentUserContext)
+
     return (
         <>
-            <Header headerClass='header_lite'>
-                <Navigation></Navigation>
+            <Header
+                headerStyle='lite'
+                loggedIn={true}
+            >
             </Header>
             <section className="profile__content">
-                <h1 className="profile__hello">Привет, Ольга!</h1>
+                <h1 className="profile__hello">Привет, {currentUser.name}!</h1>
                 <div className="profile__data">
                     <p>Имя</p>
-                    <h4>Ольга</h4>
+                    <h4>{currentUser.name}</h4>
                 </div>
                 <div className="profile__line"></div>
                 <div className="profile__data">
                     <p>E-mail</p>
-                    <h4>pochta@yandex.ru</h4>
+                    <h4>{currentUser.email}</h4>
                 </div>
                 <div className="profile__actions">
                     <a href="/profile" className="profile__edit">Редактировать</a>
-                    <a href="/profile" className="profile__signout">Выйти из аккаунта</a>
+                    <span onClick={logout} className="profile__signout">Выйти из аккаунта</span>
                 </div>
             </section>
         </>

@@ -3,7 +3,7 @@
     height: 44px;
     border: none;
     cursor: pointer;
-    background-color: #FFFFFF;
+    background: none;
 }
 
 .navigation__popup {
@@ -34,6 +34,10 @@
     color: #000000;
     text-decoration: none;
     margin: 0 0 28px;
+}
+
+.header__link_big_active {
+    font-weight: 700;
 }
 
 .navigation__button_close {
