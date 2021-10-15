@@ -1,0 +1,121 @@
+.about__project {
+    max-height: 608px;
+    padding-left: 70px;
+    padding-right: 70px;
+    padding-top: 110px;
+    padding-bottom: 0;
+}
+
+.title {
+    max-width: 600px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 22px;
+    line-height: 27px;
+    letter-spacing: -0.04em;
+    color: #000000;
+    margin: 0;
+}
+
+.line {
+    margin-top: 23px;
+    border-bottom: 1px solid #000000;
+}
+
+.info {
+    padding-top: 70px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+}
+
+.about__info {
+    max-width: 550px;
+}
+
+.about__title {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: -0.04em;
+    color: #000000;
+    margin-top: 0;
+    margin-bottom: 26px;
+}
+
+.about__paragraph {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+    color: #000000;
+    margin: 0;
+}
+
+.weeks {
+    margin-top: 110px;
+    margin-bottom: 110px;
+}
+
+.week {
+    display: grid;
+    grid-template-columns: repeat(1, 3fr 7fr);
+    grid-template-rows: repeat(1, 36px);
+}
+
+.week__backend {
+    background-color: #2BE080;
+    text-align: center;
+    line-height: 36px;
+    height: 100%;
+    font-size: 14px;
+}
+
+.week__frontend {
+    background-color: #F2F2F2;
+    text-align: center;
+    line-height: 36px;
+    height: 100%;
+    font-size: 14px;
+}
+
+.technology {
+    text-align: center;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    color: #A0A0A0;
+    line-height: 36px;
+    height: 100%;
+}
+
+
+@media screen and (max-width: 520px) {
+    .title {
+        font-size: 18px;
+        line-height: 22px;
+    }
+    .about__project {
+        padding-top: 70px;
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+    .info {
+        grid-template-columns: 1fr;
+    }
+    .about__paragraph {
+        font-size: 12px;
+        line-height: 18px;
+    }
+    .week__backend {
+        font-size: 11px;
+    }
+    .week__frontend {
+        font-size: 11px;
+    }
+    .technology {
+        font-size: 11px;
+    }
+}

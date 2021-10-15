@@ -1,0 +1,38 @@
+.card__list {
+    padding-left: 70px;
+    padding-right: 70px;
+    padding-top: 30px;
+}
+
+.movie__button-more {
+    width: 320px;
+    height: 36px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: center;
+    border-radius: 5px;
+    box-sizing: border-box;
+    border: 1.5px solid #E8E8E8;
+    background-color: #FFFFFF;
+    cursor: pointer;
+    margin: 0 auto;
+    display: block;
+    margin-top: 50px;
+    margin-bottom: 80px;
+}
+
+@media screen and (max-width: 768px) {
+    .card__list {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .card__list {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
