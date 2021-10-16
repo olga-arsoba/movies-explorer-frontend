@@ -24,6 +24,7 @@ function Register(props) {
             setName('')
             setEmail('')
             setPassword('')
+            history.push('/signin')
         })
     }
 
