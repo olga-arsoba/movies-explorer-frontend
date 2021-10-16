@@ -2,8 +2,10 @@ import React from 'react'
 import './Register.css'
 import Logo from '../Header/Logo/Logo'
 import {Link} from "react-router-dom";
+import {useHistory} from "react-router";
 
 function Register(props) {
+    const history = useHistory()
     const {handleRegister} = props
     const [name, setName] = React.useState('')
     const [email, setEmail] = React.useState('')
