@@ -68,6 +68,12 @@
     margin-bottom: 16px;
 }
 
+.form__button:disabled {
+    background-color: #3456F3;
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 .form__error {
     font-style: normal;
     font-weight: normal;

@@ -45,7 +45,7 @@ function MoviesCardList(props) {
         <section className="card__list">
             {moviesList.map((movie, i) => (
                 <MoviesCard
-                    key={movie.id}
+                    key={movie._id}
                     movie={movie}
                     savedMovies={savedMovies}
                     loadSavedMovies={loadSavedMovies}

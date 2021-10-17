@@ -11,6 +11,10 @@ function Movies(props) {
     const [filteredMovies, setFilteredMovies] = React.useState([])
     const [isLoading, setIsLoading] = React.useState(false)
 
+    React.useEffect(() => {
+        loadSavedMovies()
+    }, [loadSavedMovies])
+
     const searchMovies = (searchQuery, isShortMovie) => {
         setFilteredMovies([])
         setIsLoading(true)
@@ -44,7 +48,6 @@ function Movies(props) {
                 isLoading={isLoading}
                 setIsLoading={setIsLoading}
                 savedMovies={savedMovies}
-                loadSavedMovies={loadSavedMovies}
             >
             </MoviesCardList>
 

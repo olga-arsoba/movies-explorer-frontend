@@ -42,6 +42,18 @@ class MainApi {
             .then(this._checkResponse)
     }
 
+    updateProfile ({ name, email }) {
+        return fetch(`${this._baseUrl}/users/me`, {
+            method: 'PATCH',
+            headers: this.getHeadersWithJWT(),
+            body: JSON.stringify({
+                name,
+                email,
+            })
+        })
+            .then(this._checkResponse)
+    }
+
     movies () {
         return fetch(`${this._baseUrl}/movies`, {
             method: 'GET',

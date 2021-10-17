@@ -2,6 +2,7 @@ import React from 'react'
 import './Profile.css'
 import Header from '../Header/Header'
 import {CurrentUserContext} from '../../contexts/CurrentUserContext'
+import {Link} from "react-router-dom";
 
 function Profile(props) {
     const {logout} = props
@@ -26,7 +27,9 @@ function Profile(props) {
                     <h4>{currentUser.email}</h4>
                 </div>
                 <div className="profile__actions">
-                    <a href="/profile" className="profile__edit">Редактировать</a>
+                    <Link to="/edit-profile" className="profile__edit">
+                        Редактировать
+                    </Link>
                     <span onClick={logout} className="profile__signout">Выйти из аккаунта</span>
                 </div>
             </section>

@@ -14,17 +14,19 @@ function SearchForm(props) {
 
     const handleCheckboxChange = (isChecked) => {
         setIsShortMovie(isChecked)
+        searchMovies(searchQuery, isChecked)
     }
 
-    const handleSearchMovies = () => {
+    const handleSearchMovies = (e) => {
+        e.preventDefault()
         searchMovies(searchQuery, isShortMovie)
     }
 
     return (
-        <form className="search__form">
+        <form className="search__form" onSubmit={handleSearchMovies}>
             <div className="buttonin">
                 <input type="text" className="search__film" placeholder="Фильм" value={searchQuery} onChange={handleSearchQueryChange}/>
-                <button type="button" className="search__button" onClick={handleSearchMovies}>Поиск</button>
+                <button type="submit" className="search__button">Поиск</button>
             </div>
             <FilterCheckbox
                 handleCheckboxChange={handleCheckboxChange}

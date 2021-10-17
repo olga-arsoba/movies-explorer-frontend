@@ -10,8 +10,6 @@ function Navigation(props) {
     const { headerStyle } = props
     const [isNavigationPopupShown, setIsNavigationPopupShown] = React.useState(false)
 
-    console.log(location.pathname);
-
     return (
         <div className="navigation">
             <div className="navigation__top">

@@ -6,7 +6,7 @@ import { convertMinsToHrsMins } from '../../../utils/utils'
 const IMG_BASE_URL = 'https://api.nomoreparties.co'
 
 function MoviesCard(props) {
-    const {movie, savedMovies, loadSavedMovies} = props
+    const {movie, savedMovies} = props
 
     const [isLiked, setIsLiked] = React.useState(false)
 
@@ -23,10 +23,7 @@ function MoviesCard(props) {
         if (isLiked) {
             mainApi.deleteMovie(getSavedMovieId())
                 .then(() => {
-                    loadSavedMovies()
-                        .then(() => {
-                            setIsLiked(false)
-                        })
+                    setIsLiked(false)
                 })
         } else {
             mainApi.createMovie({
@@ -43,10 +40,7 @@ function MoviesCard(props) {
                 movieId: movie.id,
             })
                 .then(() => {
-                    loadSavedMovies()
-                        .then(() => {
-                            setIsLiked(true)
-                        })
+                    setIsLiked(true)
                 })
         }
     }

@@ -12,13 +12,15 @@ import Error404 from '../Error404/Error404'
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import mainApi from '../../utils/MainApi'
 import {CurrentUserContext} from '../../contexts/CurrentUserContext'
-import moviesApi from "../../utils/MoviesApi";
+import moviesApi from '../../utils/MoviesApi'
+import EditProfile from '../EditProfile/EditProfile'
 
 function App() {
     const history = useHistory()
     const [loggedIn, setLoggedIn] = React.useState(false)
     const [movies, setMovies] = React.useState([])
     const [savedMovies, setSavedMovies] = React.useState([])
+    const [isLoading, setIsLoading] = React.useState(true)
     const [currentUser, setCurrentUser] = React.useState({
         name: '',
         email: '',
@@ -27,32 +29,44 @@ function App() {
 
     const handleRegister = (name, email, password) => {
         return mainApi.signUp(name, email, password).then((data) => {
-            //showTooltip(true)
+            return handleLogin(email, password)
         }).catch((err) => {
             console.error(err)
-            //showTooltip(false)
         })
     }
 
     const handleLogin = (email, password) => {
         return mainApi.signIn(email, password).then((data) => {
             localStorage.setItem('token', data.token)
-            tokenCheck()
+            tokenCheck('/movies')
         }).catch((err) => {
             console.error(err)
-            //showTooltip(false)
+        })
+    }
+
+    const updateProfile = (name, email) => {
+        return mainApi.updateProfile({ name, email }).then(() => {
+            setCurrentUser({
+                name,
+                email
+            })
         })
     }
 
     const tokenCheck = useCallback(
-        () => {
+        (redirect = null) => {
+            setIsLoading(true)
             if (localStorage.getItem('token')) {
                 const jwt = localStorage.getItem('token')
                 mainApi.me(jwt).then((data) => {
                     if (data) {
                         setCurrentUser(data.data)
                         setLoggedIn(true)
-                        history.push('/movies')
+                        setIsLoading(false)
+
+                        if (redirect) {
+                            history.push(redirect)
+                        }
                     }
                 }).catch((err) => {
                     console.error(err)
@@ -66,14 +80,16 @@ function App() {
         tokenCheck()
     }, [tokenCheck])
 
-    const loadSavedMovies = () => {
+    const loadSavedMovies = useCallback(() => {
         return mainApi.movies()
             .then((data) => {
                 setSavedMovies(data.data)
             }).catch((err) => {
                 console.error(err)
             })
-    }
+        },
+        []
+    )
 
     const loadMovies = () => {
         return new Promise((resolve, reject) => {
@@ -104,46 +120,55 @@ function App() {
 
     return (
         <CurrentUserContext.Provider value={currentUser}>
-            <Switch>
-                <ProtectedRoute
-                    loggedIn={loggedIn}
-                    path="/movies"
-                    component={Movies}
-                    movies={movies}
-                    savedMovies={savedMovies}
-                    loadMovies={loadMovies}
-                    loadSavedMovies={loadSavedMovies}
-                />
-                <ProtectedRoute
-                    loggedIn={loggedIn}
-                    path="/saved-movies"
-                    component={SavedMovies}
-                    loadSavedMovies={loadSavedMovies}
-                    savedMovies={savedMovies}
-                />
-                <ProtectedRoute
-                    loggedIn={loggedIn}
-                    path="/profile"
-                    component={Profile}
-                    logout={logout}
-                />
-                <Route path="/signin">
-                    <Login
-                        handleLogin={handleLogin}
+            {!isLoading && (
+                <Switch>
+                    <ProtectedRoute
+                        loggedIn={loggedIn}
+                        path="/movies"
+                        component={Movies}
+                        movies={movies}
+                        savedMovies={savedMovies}
+                        loadMovies={loadMovies}
+                        loadSavedMovies={loadSavedMovies}
                     />
-                </Route>
-                <Route path="/signup">
-                    <Register
-                        handleRegister={handleRegister}
+                    <ProtectedRoute
+                        loggedIn={loggedIn}
+                        path="/saved-movies"
+                        component={SavedMovies}
+                        loadSavedMovies={loadSavedMovies}
+                        savedMovies={savedMovies}
                     />
-                </Route>
-                <Route path="/">
-                    <Main loggedIn={loggedIn}/>
-                </Route>
-                <Route path="*">
-                    <Error404/>
-                </Route>
-            </Switch>
+                    <ProtectedRoute
+                        loggedIn={loggedIn}
+                        path="/profile"
+                        component={Profile}
+                        logout={logout}
+                    />
+                    <ProtectedRoute
+                        loggedIn={loggedIn}
+                        path="/edit-profile"
+                        component={EditProfile}
+                        logout={logout}
+                        updateProfile={updateProfile}
+                    />
+                    <Route path="/signin">
+                        <Login
+                            handleLogin={handleLogin}
+                        />
+                    </Route>
+                    <Route path="/signup">
+                        <Register
+                            handleRegister={handleRegister}
+                        />
+                    </Route>
+                    <Route path="/">
+                        <Main loggedIn={loggedIn}/>
+                    </Route>
+                    <Route path="*">
+                        <Error404/>
+                    </Route>
+                </Switch>)
+            }
         </CurrentUserContext.Provider>
     );
 }
