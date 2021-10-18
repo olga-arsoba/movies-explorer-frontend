@@ -62,16 +62,21 @@ function App() {
                     if (data) {
                         setCurrentUser(data.data)
                         setLoggedIn(true)
-                        setIsLoading(false)
 
                         if (redirect) {
                             history.push(redirect)
                         }
                     }
+                    setIsLoading(false)
+
                 }).catch((err) => {
+                    setIsLoading(false)
+
                     console.error(err)
                 })
             }
+            setIsLoading(false)
+
         },
         [history],
     )
