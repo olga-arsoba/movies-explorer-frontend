@@ -1,8 +1,10 @@
 import React from 'react'
 import './Error404.css'
-import {Link} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
 function Error404() {
+    const history = useHistory()
+
     return (
         <>
             <section className="error">
@@ -10,7 +12,7 @@ function Error404() {
                     <h2 className="error__name">404</h2>
                     <h3 className="error__description">Страница не найдена</h3>
                 </div>
-                <Link to="/" className="error__link">Назад</Link>
+                <span className="error__link" onClick={history.goBack}>Назад</span>
             </section>
         </>
     )

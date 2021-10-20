@@ -3,19 +3,54 @@ import Header from '../Header/Header'
 import SearchForm from '../Movies/SearchForm/SearchForm'
 import MoviesCardList from '../SavedMovies/MoviesCardList/MoviesCardList'
 import Footer from '../Footer/Footer'
-import Navigation from "../Navigation/Navigation";
+import {filterMovies} from "../../utils/filters";
 
-function SavedMovies() {
+function SavedMovies(props) {
+    const {savedMovies, loadSavedMovies} = props
+
+    const [filteredMovies, setFilteredMovies] = React.useState([])
+    const [isLoading, setIsLoading] = React.useState(false)
+    const [searchQuery, setSearchQuery] = React.useState('')
+    const [isShortMovie, setIsShortMovie] = React.useState(false)
+
+    React.useEffect(() => {
+        loadSavedMovies()
+    }, [loadSavedMovies])
+
+    React.useEffect(() => {
+        setFilteredMovies(
+            filterMovies(savedMovies, { searchQuery, isShortMovie })
+        )
+    }, [savedMovies, searchQuery, isShortMovie])
+
+    const searchMovies = (query, isShort) => {
+        setSearchQuery(query)
+        setIsShortMovie(isShort)
+
+        setFilteredMovies(
+            filterMovies(savedMovies, { searchQuery, isShortMovie })
+        )
+        setIsLoading(false)
+    }
+
     return (
         <>
-            <Header headerClass='header_lite'>
-                <Navigation></Navigation>
+            <Header
+                headerStyle='lite'
+                loggedIn={true}
+            >
             </Header>
 
-            <SearchForm>
+            <SearchForm
+                searchMovies={searchMovies}
+            >
             </SearchForm>
 
-            <MoviesCardList>
+            <MoviesCardList
+                isLoading={isLoading}
+                savedMovies={filteredMovies}
+                loadSavedMovies={loadSavedMovies}
+            >
             </MoviesCardList>
 
             <Footer>
