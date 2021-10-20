@@ -9,13 +9,23 @@ function MoviesCard(props) {
     const {movie, savedMovies} = props
 
     const [isLiked, setIsLiked] = React.useState(false)
+    const [internalMovieId, setInternalMovieId] = React.useState(null)
 
     const getMovieImg = (path) => {
         return `${IMG_BASE_URL}${path}`
     }
 
     const getSavedMovieId = () => {
+        if (internalMovieId !== null) {
+            return internalMovieId
+        }
+
         const m = savedMovies.find((savedMovie) => savedMovie.movieId === movie.id)
+
+        if (m._id) {
+            setInternalMovieId(m._id)
+        }
+
         return m._id ?? null
     }
 
@@ -39,7 +49,8 @@ function MoviesCard(props) {
                 thumbnail: getMovieImg(movie.image.formats.thumbnail.url),
                 movieId: movie.id,
             })
-                .then(() => {
+                .then((data) => {
+                    setInternalMovieId(data.data._id)
                     setIsLiked(true)
                 })
         }

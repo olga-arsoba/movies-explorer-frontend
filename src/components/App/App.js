@@ -13,7 +13,6 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import mainApi from '../../utils/MainApi'
 import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import moviesApi from '../../utils/MoviesApi'
-import EditProfile from '../EditProfile/EditProfile'
 
 function App() {
     const history = useHistory()
@@ -74,9 +73,9 @@ function App() {
 
                     console.error(err)
                 })
+            } else {
+                setIsLoading(false)
             }
-            setIsLoading(false)
-
         },
         [history],
     )
@@ -118,7 +117,8 @@ function App() {
     }
 
     const logout = () => {
-        localStorage.setItem('token', '')
+        localStorage.removeItem('token')
+        localStorage.removeItem('movies')
         setLoggedIn(false)
         history.push('/')
     }
@@ -148,28 +148,22 @@ function App() {
                         path="/profile"
                         component={Profile}
                         logout={logout}
-                    />
-                    <ProtectedRoute
-                        loggedIn={loggedIn}
-                        path="/edit-profile"
-                        component={EditProfile}
-                        logout={logout}
                         updateProfile={updateProfile}
                     />
-                    <Route path="/signin">
+                    <Route exact path="/signin">
                         <Login
                             handleLogin={handleLogin}
                         />
                     </Route>
-                    <Route path="/signup">
+                    <Route exact path="/signup">
                         <Register
                             handleRegister={handleRegister}
                         />
                     </Route>
-                    <Route path="/">
+                    <Route exact path="/">
                         <Main loggedIn={loggedIn}/>
                     </Route>
-                    <Route path="*">
+                    <Route>
                         <Error404/>
                     </Route>
                 </Switch>)
