@@ -1,6 +1,6 @@
 import React from 'react'
 import './Error404.css'
-import {Link, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
 function Error404() {
     const history = useHistory()
